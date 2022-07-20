@@ -1,0 +1,20 @@
+<div class="feed-alert">
+    <div class="headline">
+        <p>Morty updated their profile picture</p>
+        <p>12/02/2022</p>
+    </div>
+    <div class="image-container">
+        <img src="https://images.pexels.com/photos/4646215/pexels-photo-4646215.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
+        <div class="reaction">
+            <div class="reaction">
+                <p (click)="likeButtonClick()" style="margin-right: 0.2em;"><i class='bx bx-like bx-sm'></i></p>
+                <p>{{numberOfLikes}}</p>
+            </div>
+
+            <div class="reaction">
+                <p style="margin-right: 0.2em; margin-left: 0.7em;"><i class='bx bx-comment bx-sm'></i></p>
+                <p>4</p>
+            </div>
+        </div>
+    </div>
+</div><br><hr><br>
