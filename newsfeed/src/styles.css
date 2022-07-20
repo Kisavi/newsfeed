@@ -1,1 +1,96 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+    overflow-x: hidden;
+}
+* {
+    box-sizing: border-box;
+}
+
+.center {
+    text-align: center;
+    font-size: large;
+    text-decoration: underline;
+}
+
+.feedsSection {
+    width: 100vw;
+}
+
+/* navbar */
+
+.nav {
+    width: 20%;
+    float: left;
+}
+
+/* feeds */
+.all-feeds {
+    width: 78.8%;
+    float: left;
+    background: rgb(245, 245, 245);
+    margin-left: 1em;
+    padding: 2em;
+}
+
+
+/* image alert */
+.feed-alert {
+    border-radius: 0.3em;
+    background-color: white;
+    
+}
+
+.headline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1em;
+}
+
+.image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+img {
+    height: 20em;
+    width: 35em;
+}
+
+.reaction {
+    display: flex;
+    align-items: center;
+}
+
+/* comment alert */
+.comment {
+    padding: 0.1em 1em;
+    font-style: italic;
+}
+
+@media screen and (max-width: 600px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    .nav {
+        width: 96%;
+        margin: 0 0 0.8em 0;
+    }
+
+    .all-feeds {
+        margin: 0;
+        width: 100%;
+    }
+
+    img {
+        height: auto;
+        width: 100%;
+    }
+
+    .headline {
+        display: block;
+    }
+}
