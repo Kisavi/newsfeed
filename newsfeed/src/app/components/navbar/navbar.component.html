@@ -3,23 +3,14 @@
         <li>
             <a href="#">AllFriends</a>
         </li><hr>
+        <ul *ngFor="let user of users">
         <li>
             <a routerLink="/user" href="#">
-                <img src="https://images.pexels.com/photos/4646215/pexels-photo-4646215.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
-                <p>Morty</p>
+                <img src="{{user.avatar_url}}">
+                <p>{{user.firstname}}</p>
             </a>
         </li>
-        <li>
-            <a href="#">Rick</a>
-        </li>
-        <li>
-            <a href="#">Sponge</a>
-        </li>
-        <li>
-            <a href="#">Ninja</a>
-        </li>
-        <li>
-            <a href="#">Patrick</a>
-        </li>
+        </ul>
     </ul>
 </div>
+
