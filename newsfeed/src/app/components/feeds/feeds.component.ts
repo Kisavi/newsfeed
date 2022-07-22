@@ -10,30 +10,48 @@ import { User } from 'src/app/models/user';
   styleUrls: ['./feeds.component.css']
 })
 export class FeedsComponent implements OnInit {
-  public feeds:Feed[] = [];
-  public users:User[] = [];
+  public feeds: any[] = [];
+  public users: User[] = [];
   public randomIndex = 0;
-  public randomUser:any = {}
+  public randomUser: any = {}
 
-  constructor(private feedService: FeedService,private userService: UserService) { }
+  constructor(private feedService: FeedService, private userService: UserService) { }
 
-  // subscribe to the observable returned by the feed service
+  // subscribe to the observable returned by the feed service to get all feeds
   ngOnInit(): void {
     this.feedService.getAllFeeds()
-     .subscribe(data => {console.log(data)
-       this.feeds = data 
-      console.log(this.feeds)})
-      this.userService.getUsers()
-      // subscribe to the observable returned by the user service to get user list
-      .subscribe(data => {console.log(data)
+      .subscribe(data => {
+        console.log(data)
+        this.feeds = data
+        console.log(this.feeds)
+      })
+    this.userService.getUsers()
+      // subscribe to the observable returned by the user service to get all users
+      .subscribe(data => {
+        console.log(data)
         this.users = data
         console.log(this.users)
         // get a random index from the user's array
-          this.randomIndex = Math.floor((Math.random() * this.users.length))
-          console.log(this.randomIndex)
-          // get the user at the index of the random index in the user's array
-          this.randomUser = this.users[this.randomIndex]
-            console.log(this.randomUser)});
+        this.randomIndex = Math.floor((Math.random() * this.users.length))
+        console.log(this.randomIndex)
+        // get the user at the index of the random index in the user's array
+        this.randomUser = this.users[this.randomIndex]
+        console.log(this.randomUser)
+      });
   }
+  like(index: number) {
+    console.log(index)
+    console.log(this.randomUser)
+    let newLike = {
+      "subject": this.randomUser.firstname,
+      "action": "liked",
+      "pronoun": `${this.feeds[index].subject}'s`,
+      "object": this.feeds[index].object,
+      "context": "thumb",
+      "date": Date.now(),
+      "userId": this.randomUser.id
+    }
 
+    this.feeds.unshift(newLike)
+  };
 }

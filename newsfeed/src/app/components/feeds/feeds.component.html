@@ -7,7 +7,7 @@
         <h6 class="center">All feeds alert</h6>
         <p *ngIf="randomUser">{{randomUser.firstname}}</p>
         <img *ngIf="randomUser" src="{{randomUser.avatar_url}}" style="height: 1.5rem; width: 1.5rem;">
-        <div *ngFor="let feed of feeds" class="allFeeds">
+        <div *ngFor="let feed of feeds; index as i" class="allFeeds">
             <!-- images -->
             <div *ngIf="feed.hasOwnProperty('image_url')" class="feed-alert">
                 <div class="headline">
@@ -18,7 +18,7 @@
                     <img src="{{feed.image_url}}">
                     <div class="reaction">
                         <div class="reaction">
-                            <p style="margin-right: 0.2em;"><i class='bx bx-like bx-sm'></i></p>
+                            <p style="margin-right: 0.2em;"(click)="like(i)"><i class='bx bx-like bx-sm'></i></p>
                             <p>{{feed.likes.length}}</p>
                         </div>
 
