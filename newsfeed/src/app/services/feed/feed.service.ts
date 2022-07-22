@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 export class FeedService {
   // feed url
   private feedUrl = `${environment.baseUrl}/feeds`
+ 
 
   constructor(private http: HttpClient) { }
 

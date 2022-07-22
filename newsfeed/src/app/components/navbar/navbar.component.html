@@ -3,11 +3,11 @@
         <li>
             <a href="#">AllFriends</a>
         </li><hr>
-        <ul *ngFor="let user of users">
+        <ul *ngFor="let user of users; index as i">
         <li>
-            <a routerLink="/user" href="#">
+            <a routerLink="" href="#">
                 <img src="{{user.avatar_url}}">
-                <p>{{user.firstname}} {{user.lastname}}</p>
+                <p (click)="getUser(i)">{{user.firstname}} {{user.lastname}}</p>
             </a>
         </li>
         </ul>
