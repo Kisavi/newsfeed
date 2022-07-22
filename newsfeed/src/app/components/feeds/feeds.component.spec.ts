@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LikeAlertComponent } from './like-alert.component';
+import { FeedsComponent } from './feeds.component';
 
-describe('LikeAlertComponent', () => {
-  let component: LikeAlertComponent;
-  let fixture: ComponentFixture<LikeAlertComponent>;
+describe('FeedsComponent', () => {
+  let component: FeedsComponent;
+  let fixture: ComponentFixture<FeedsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LikeAlertComponent ]
+      declarations: [ FeedsComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(LikeAlertComponent);
+    fixture = TestBed.createComponent(FeedsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

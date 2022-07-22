@@ -1,19 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Feed } from 'src/app/models/feed';
 import { environment } from 'src/environments/environment';
-import { Image } from 'src/app/models/image';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ImageService {
-  // image url
-  private imageUrl = `${environment.baseUrl}/images`
+export class FeedService {
+  // feed url
+  private feedUrl = `${environment.baseUrl}/feeds`
 
   constructor(private http: HttpClient) { }
-  // method to get all images
-  getImages(): Observable<Image[]> {
-    return this.http.get<Image[]>(this.imageUrl)
+
+  //method to get all the feeds
+  getAllFeeds(): Observable<Feed[]> {
+    return this.http.get<Feed[]>(this.feedUrl)
   }
 }

@@ -1,0 +1,54 @@
+<div class="feedsSection">
+    <div class="nav">
+        <app-navbar></app-navbar>
+    </div>
+
+    <div class="all-feeds">
+        <h6 class="center">All feeds alert</h6>
+        <div *ngFor="let feed of feeds" class="allFeeds">
+            <!-- images -->
+            <div *ngIf="feed.hasOwnProperty('image_url')" class="feed-alert">
+                <div class="headline">
+                    <p>{{feed.subject}} {{feed.action}} {{feed.pronoun}} {{feed.object}}</p>
+                    <p>{{feed.date | date: "dd/MM/yyyy 'at' h:mma"}}</p>
+                </div>
+                <div class="image-container">
+                    <img src="{{feed.image_url}}">
+                    <div class="reaction">
+                        <div class="reaction">
+                            <p style="margin-right: 0.2em;"><i class='bx bx-like bx-sm'></i></p>
+                            <p>{{feed.likes.length}}</p>
+                        </div>
+
+                        <div class="reaction">
+                            <p style="margin-right: 0.2em; margin-left: 0.7em;"><i class='bx bx-comment bx-sm'></i></p>
+                            <p>{{feed.comments.length}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end of image -->
+           
+            <!-- alert for showing comment activity -->
+            <div *ngIf="feed.hasOwnProperty('message')" class="feed-alert">
+                <div class="headline">
+                    <p>{{feed.subject}} {{feed.action}} {{feed.pronoun}} {{feed.object}}</p>
+                    <p>{{feed.date | date: "dd/MM/yyyy 'at' h:mma"}}</p>
+                </div>
+                <div class="comment">
+                    <p>{{feed.message}}</p>
+                </div>
+            </div>
+            <!-- end of comment -->
+            
+            <!-- alert for showing like activity -->
+            <div *ngIf="feed.hasOwnProperty('context')" class="feed-alert">
+                <div class="headline ">
+                    <p>{{feed.subject}} {{feed.action}} {{feed.pronoun}} {{feed.object}}</p>
+                    <p>{{feed.date | date: "dd/MM/yyyy 'at' h:mma"}}</p>
+                </div>
+            </div>
+             <!-- end of like -->
+        </div>
+    </div>
+</div>
