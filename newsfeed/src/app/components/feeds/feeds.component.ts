@@ -13,7 +13,8 @@ export class FeedsComponent implements OnInit {
   public feeds: any[] = [];
   public users: User[] = [];
   public randomIndex = 0;
-  public randomUser: any = {}
+  public randomUser: any = {};
+  userId!: number;
 
   constructor(private feedService: FeedService, private userService: UserService) { }
 
@@ -21,27 +22,27 @@ export class FeedsComponent implements OnInit {
   ngOnInit(): void {
     this.feedService.getAllFeeds()
       .subscribe(data => {
-        console.log(data)
+        // console.log(data)
         this.feeds = data
-        console.log(this.feeds)
+        // console.log(this.feeds)
       })
     this.userService.getUsers()
       // subscribe to the observable returned by the user service to get all users
       .subscribe(data => {
-        console.log(data)
+        // console.log(data)
         this.users = data
-        console.log(this.users)
+        // console.log(this.users)
         // get a random index from the user's array
         this.randomIndex = Math.floor((Math.random() * this.users.length))
-        console.log(this.randomIndex)
+        // console.log(this.randomIndex)
         // get the user at the index of the random index in the user's array
         this.randomUser = this.users[this.randomIndex]
-        console.log(this.randomUser)
+        // console.log(this.randomUser)
       });
   }
   like(index: number) {
-    console.log(index)
-    console.log(this.randomUser)
+    // console.log(index)
+    // console.log(this.randomUser)
     let newLike = {
       "subject": this.randomUser.firstname,
       "action": "liked",
@@ -54,4 +55,10 @@ export class FeedsComponent implements OnInit {
 
     this.feeds.unshift(newLike)
   };
+
+
+  setUserId(id: any) {
+    this.userId = id
+    console.log(this.userId)
+  }
 }

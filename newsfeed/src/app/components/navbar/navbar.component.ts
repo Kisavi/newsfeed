@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UserService } from 'src/app/services/user/user.service';
 import { User } from 'src/app/models/user';
 
@@ -9,11 +9,13 @@ import { User } from 'src/app/models/user';
 })
 export class NavbarComponent implements OnInit {
 
+  @Output() userId=new EventEmitter<number>();
+
   public users:User[] = [];
 
   constructor(private userService: UserService) { }
 
-  // subscribe to the observerble returned in the user service module
+  // subscribe to the observerble returned in the user service module to get all users
   ngOnInit(): void {
     this.userService.getUsers()
     .subscribe(data => {console.log(data)
@@ -21,5 +23,12 @@ export class NavbarComponent implements OnInit {
        console.log(this.users)});
   }
   
+// get single user(userId of the user clicked)
+getUser(index: number){
+  console.log(this.users[index].firstname)
+  let UserId = this.users[index].id
+  console.log(UserId)
+    this.userId.emit(UserId);
+}
 
 }
