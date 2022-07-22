@@ -5,6 +5,8 @@
 
     <div class="all-feeds">
         <h6 class="center">All feeds alert</h6>
+        <p *ngIf="randomUser">{{randomUser.firstname}}</p>
+        <img *ngIf="randomUser" src="{{randomUser.avatar_url}}" style="height: 1.5rem; width: 1.5rem;">
         <div *ngFor="let feed of feeds" class="allFeeds">
             <!-- images -->
             <div *ngIf="feed.hasOwnProperty('image_url')" class="feed-alert">

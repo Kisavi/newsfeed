@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user/user.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +9,7 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class NavbarComponent implements OnInit {
 
-  public users:any[] = [];
+  public users:User[] = [];
 
   constructor(private userService: UserService) { }
 
@@ -16,7 +17,9 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUsers()
     .subscribe(data => {console.log(data)
-      this.users = data});
+      this.users = data
+       console.log(this.users)});
   }
+  
 
 }
