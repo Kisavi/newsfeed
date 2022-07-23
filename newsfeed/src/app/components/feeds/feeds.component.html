@@ -1,12 +1,12 @@
 <div class="feedsSection">
     <div class="nav">
-        <app-navbar (userId)="setUserId($event)"></app-navbar>
+        <app-navbar (userId)="setUserId($event)" (getUserFeeds)="getFeeds()"></app-navbar>
     </div>
 
     <div class="all-feeds">
         <h6 class="center">All feeds alert</h6>
         <p *ngIf="randomUser">{{randomUser.firstname}}</p>
-        <p>{{userId}}</p>
+        <!-- <p>{{userId}}</p> -->
         <img *ngIf="randomUser" src="{{randomUser.avatar_url}}" style="height: 1.5rem; width: 1.5rem;">
         <div *ngFor="let feed of feeds; index as i" class="allFeeds">
             <!-- images -->

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FeedService } from 'src/app/services/feed/feed.service';
 import { UserService } from 'src/app/services/user/user.service';
-import { Feed } from 'src/app/models/feed';
 import { User } from 'src/app/models/user';
 
 @Component({
@@ -14,20 +13,16 @@ export class FeedsComponent implements OnInit {
   public users: User[] = [];
   public randomIndex = 0;
   public randomUser: any = {};
-  userId!: number;
+  public userId!: number;
 
   constructor(private feedService: FeedService, private userService: UserService) { }
 
-  // subscribe to the observable returned by the feed service to get all feeds
+  
   ngOnInit(): void {
-    this.feedService.getAllFeeds()
-      .subscribe(data => {
-        // console.log(data)
-        this.feeds = data
-        // console.log(this.feeds)
-      })
+    this.getFeeds()
+    
+    // subscribe to the observable returned by the user service to get all users
     this.userService.getUsers()
-      // subscribe to the observable returned by the user service to get all users
       .subscribe(data => {
         // console.log(data)
         this.users = data
@@ -56,9 +51,25 @@ export class FeedsComponent implements OnInit {
     this.feeds.unshift(newLike)
   };
 
+ // subscribe to the observable returned by the feed service to get all feeds
+  getFeeds(){
+    this.feedService.getAllFeeds()
+      .subscribe(data => {
+        // console.log(data)
+        this.feeds = data
+        // console.log(this.feeds)
+      })
+  }
 
-  setUserId(id: any) {
+// receive the emitted userid and query the database using the userId
+  setUserId(id: number) {
+    // let userId = id
     this.userId = id
-    console.log(this.userId)
+    this.feedService.getUserFeed(this.userId)
+      .subscribe(data => {
+        console.log(data)
+          this.feeds = data
+      })
+    // console.log(this.userId)
   }
 }

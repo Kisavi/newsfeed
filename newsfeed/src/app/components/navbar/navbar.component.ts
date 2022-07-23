@@ -10,6 +10,7 @@ import { User } from 'src/app/models/user';
 export class NavbarComponent implements OnInit {
 
   @Output() userId=new EventEmitter<number>();
+  @Output() getUserFeeds =new EventEmitter();
 
   public users:User[] = [];
 
@@ -31,4 +32,9 @@ getUser(index: number){
     this.userId.emit(UserId);
 }
 
+// get all feeds
+getAllFeeds(){
+  this.getUserFeeds.emit()
+}
+ 
 }

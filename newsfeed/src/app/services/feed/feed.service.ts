@@ -9,7 +9,8 @@ import { environment } from 'src/environments/environment';
 })
 export class FeedService {
   // feed url
-  private feedUrl = `${environment.baseUrl}/feeds`
+  private feedUrl = `${environment.baseUrl}/feeds`;
+  // private userFeedUrl = `${environment.baseUrl}/feeds?userId=${userId}`;
  
 
   constructor(private http: HttpClient) { }
@@ -18,4 +19,13 @@ export class FeedService {
   getAllFeeds(): Observable<Feed[]> {
     return this.http.get<Feed[]>(this.feedUrl)
   }
+
+  // method to get feeds of a single user
+  getUserFeed(userId: any): Observable<Feed[]> {
+        return this.http.get<Feed[]>(`${this.feedUrl}?userId=${userId}`)
+  }
+
+  // method to create a feed in the database
+  createFeed(){}
+
 }
