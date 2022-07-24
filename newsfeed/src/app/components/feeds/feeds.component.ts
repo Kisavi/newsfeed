@@ -16,9 +16,10 @@ export class FeedsComponent implements OnInit {
   public userId!: number;
   public feed: any = {}
   public likesArray: any = []
-
+  public comments: any[]= []
+  public comment  = ""
+  
   constructor(private feedService: FeedService, private userService: UserService) { }
-
 
   ngOnInit(): void {
     this.getFeeds()
@@ -37,6 +38,7 @@ export class FeedsComponent implements OnInit {
       });
   }
 
+  // method for liking a feed
   like(index: number) {
 
     // get the name of the person who liked
@@ -70,7 +72,7 @@ export class FeedsComponent implements OnInit {
 
         let newLikeArray = this.likesArray
 
-        let updatedAlert = {
+        let addLike = {
           "subject": this.feed.subject,
           "action": this.feed.action,
           "pronoun": this.feed.pronoun,
@@ -78,23 +80,81 @@ export class FeedsComponent implements OnInit {
           "image_url": this.feed.image_url,
           "date": this.feed.date,
           "likes": newLikeArray,
-          "comments": [],
-          "userId": this.feed.userId,
-
+          "comments": this.feed.comments,
+          "userId": this.feed.userId
         }
 
         // put the selected feed with the updated like array
-        this.feedService.createLike(feedId, updatedAlert)
+        this.feedService.updateAlert(feedId, addLike)
           .subscribe(data => {
             console.log(data)
+            this.getFeeds()
           })
-          this.getFeeds()
-
       })
 
     this.getFeeds()
-
   };
+
+  // method to comment on a feed
+  getComment(index: number){
+
+     // get the name of the person who commented
+     let commentor = this.randomUser.firstname
+
+     let commentAlert = {
+      "subject": commentor,
+      "action": "commented on",
+      "pronoun": `${this.feeds[index].subject}'s`,
+      "object": this.feeds[index].object,
+      "message": this.comment,
+      "likes": [],
+      "comments": [],
+      "date": Date.now(),
+      "userId": this.randomUser.id
+     }
+
+    //  create comment alert
+    this.feedService.createAlert(commentAlert)
+     .subscribe(data => {
+      // console.log(data)
+     })
+
+    // get feed by id
+    let feedId = this.feeds[index].id
+
+    this.feedService.getFeed(feedId)
+     .subscribe(data => {
+      // console.log(data)
+      this.feed = data
+      this.comments = this.feed.comments
+      // console.log(this.comments)
+      let newComment=this.comment
+      this.comments.push({"commentor":commentor , "comment":newComment})
+      this.comment = ""
+
+      let newCommentArray = this.comments
+      // console.log(newCommentArray)
+      let addComment = {
+        "subject": this.feed.subject,
+        "action": this.feed.action,
+        "pronoun": this.feed.pronoun,
+        "object": this.feed.object,
+        "image_url": this.feed.image_url,
+        "date": this.feed.date,
+        "likes": this.feed.likes,
+        "comments": newCommentArray,
+        "userId": this.feed.userId
+      }
+
+      // put the selected feed with the updated like array
+      this.feedService.updateAlert(feedId, addComment)
+        .subscribe(data => {
+          console.log(data)
+          this.getFeeds()
+        })
+     })
+
+  }
 
   // subscribe to the observable returned by the feed service to get all feeds
   getFeeds() {
