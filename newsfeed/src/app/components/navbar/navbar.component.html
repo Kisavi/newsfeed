@@ -1,7 +1,7 @@
 <div class="navbar">
     <ul>
         <li>
-            <a href="#">AllFriends</a>
+            <a (click)="getAllFeeds()" href="#">AllFriends</a>
         </li><hr>
         <ul *ngFor="let user of users; index as i">
         <li>
