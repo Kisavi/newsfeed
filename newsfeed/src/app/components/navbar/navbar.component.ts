@@ -19,16 +19,18 @@ export class NavbarComponent implements OnInit {
   // subscribe to the observerble returned in the user service module to get all users
   ngOnInit(): void {
     this.userService.getUsers()
-    .subscribe(data => {console.log(data)
+    .subscribe(data => {
+      // console.log(data)
       this.users = data
-       console.log(this.users)});
+      //  console.log(this.users)
+      });
   }
   
 // get single user(userId of the user clicked)
 getUser(index: number){
-  console.log(this.users[index].firstname)
+  // console.log(this.users[index].firstname)
   let UserId = this.users[index].id
-  console.log(UserId)
+  // console.log(UserId)
     this.userId.emit(UserId);
 }
 

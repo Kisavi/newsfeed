@@ -8,9 +8,13 @@ export interface Feed {
     message: string;
     context: string;
     date: number;
-    likes: Array<string>;
+    likes: Like[];
     comments: Comment[];
     userId: number;
+}
+
+export interface Like {
+    like: []
 }
 
 interface Comment {
