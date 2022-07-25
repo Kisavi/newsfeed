@@ -12,7 +12,7 @@
             <img  src="{{randomUser.avatar_url}}">
         </div>
         
-        <div *ngFor="let feed of feeds; index as i" class="allFeeds">
+        <div *ngFor="let feed of feeds; let i = index" class="allFeeds">
             <!--  start images section-->
             <div *ngIf="feed.hasOwnProperty('image_url')" class="feed-alert">
                 <div class="headline">
@@ -35,10 +35,10 @@
                    
         
                     <!-- start comment section-->
-                        <div *ngIf="isShown" class="comment-section container">
+                        <div *ngIf="isActive(i)" class="comment-section container">
                             <div class="row">
                                 <div class="col-6">
-                                    <div  *ngFor="let comment of feed.comments" class="comment"> 
+                                    <div *ngFor="let comment of feed.comments" class="comment"> 
                                         <p><span class="emphasize">{{comment.commentor}}</span>: {{comment.comment}}</p>
                                     </div>
                                 </div>

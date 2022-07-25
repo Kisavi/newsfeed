@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl:"https://jsonfeedsapi.herokuapp.com"
+  baseUrl:"http://localhost:3000"
 };
