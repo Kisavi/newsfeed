@@ -1,13 +1,13 @@
 <div class="navbar">
     <ul>
-        <li>
-            <a (click)="getAllFeeds()" href="#">AllFriends</a>
+        <li class="allFriends">
+            <a  (click)="getAllFeeds()" href="#"><p>AllFriends</p> </a>
         </li><hr>
         <ul *ngFor="let user of users; index as i">
         <li>
-            <a routerLink="" href="#">
+            <a (click)="getUser(i)" routerLink="" href="#">
                 <img src="{{user.avatar_url}}">
-                <p (click)="getUser(i)">{{user.firstname}} {{user.lastname}}</p>
+                <p>{{user.firstname}} {{user.lastname}}</p>
             </a>
         </li>
         </ul>

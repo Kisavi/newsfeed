@@ -17,7 +17,7 @@ export interface Like {
     like: []
 }
 
-interface Comment {
+export interface Comment {
     commenter: string;
     comment: string;
 }
