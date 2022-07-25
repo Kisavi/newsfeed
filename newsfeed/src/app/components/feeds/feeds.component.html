@@ -35,14 +35,12 @@
                    
         
                     <!-- start comment section-->
-                    <!-- <ng-container *ngFor="let comments of feed" > -->
                         <div *ngIf="isShown" class="comment-section container">
                             <div class="row">
                                 <div class="col-6">
-                                    <div  *ngFor="let comment of comments" class="comment"> 
-                                        <!-- <p>{{comment}}</p> -->
+                                    <div  *ngFor="let comment of feed.comments" class="comment"> 
+                                        <p><span class="emphasize">{{comment.commentor}}</span>: {{comment.comment}}</p>
                                     </div>
-                                    <p>{{feed.comments | json}}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -52,7 +50,6 @@
                                 </div>
                             </div>
                         </div>
-                    <!-- </ng-container>
                     <!-- end comment section-->
                 </div>
             </div>
