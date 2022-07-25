@@ -19,7 +19,7 @@
                     <img src="{{feed.image_url}}">
                     <div class="reaction">
                         <div class="reaction">
-                            <p style="margin-right: 0.2em;"(click)="like(i)"><i class='bx bx-like bx-sm'></i></p>
+                            <p style="margin-right: 0.2em;" (click)="like(i)"><i class='bx bx-like bx-sm'></i></p>
                             <p>{{feed.likes.length}}</p>
                         </div>
 
@@ -28,10 +28,35 @@
                             <p>{{feed.comments.length}}</p>
                         </div>
                     </div>
+        
+                    <!-- start -->
+                    <section id="app">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div  class="comment">
+                                        <p>{{feed.comments}}</p>
+                                        <p *ngFor="let trial of trials">{{trial.trial }}</p>
+                                    </div>
+                                    <!--End Comment-->
+                                </div>
+                                <!--End col -->
+                            </div><!-- End row -->
+                            <div class="row">
+                                <div class="col-6">
+                                    <textarea [(ngModel)] = "comment" type="text" class="input" placeholder="Write a comment"></textarea>
+                                    <button (click)="getComment(i)" class='primaryContained float-right' type="submit">Add Comment</button>
+                                </div><!-- End col -->
+                            </div>
+                            <!--End Row -->
+                        </div>
+                        <!--End Container -->
+                    </section><!-- end App -->
+                    <!-- end -->
                 </div>
             </div>
             <!-- end of image -->
-           
+
             <!-- alert for showing comment activity -->
             <div *ngIf="feed.hasOwnProperty('message')" class="feed-alert">
                 <div class="headline">
@@ -43,7 +68,7 @@
                 </div>
             </div>
             <!-- end of comment -->
-            
+
             <!-- alert for showing like activity -->
             <div *ngIf="feed.hasOwnProperty('context')" class="feed-alert">
                 <div class="headline ">
@@ -51,7 +76,7 @@
                     <p>{{feed.date | date: "dd/MM/yyyy 'at' h:mma"}}</p>
                 </div>
             </div>
-             <!-- end of like -->
+            <!-- end of like -->
         </div>
     </div>
 </div>

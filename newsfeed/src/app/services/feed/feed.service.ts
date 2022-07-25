@@ -33,9 +33,14 @@ export class FeedService {
     return this.http.post<Feed[]>(this.feedUrl, likeDetails)
   }
 
+    // method to create a  feed alert in the database
+    createAlert(alertDetails: any): Observable<any> {
+      return this.http.post<Feed[]>(this.feedUrl, alertDetails)
+    }
+
   // method to update the like array
-  createLike(feedId: any, likeArray: any): Observable<any> {
-    return this.http.put<Feed[]>(`${this.feedUrl}/${feedId}`, likeArray)
+  updateAlert(feedId: any, alertDetails: any): Observable<any> {
+    return this.http.put<Feed[]>(`${this.feedUrl}/${feedId}`, alertDetails)
   }
   
 
