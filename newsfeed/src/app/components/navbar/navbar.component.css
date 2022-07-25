@@ -2,10 +2,13 @@
     border: 1px solid transparent;
     background-color: rgb(222, 222, 222);
     border-radius: 0.3em;
-    margin-left: 1em;
+    margin-left: 0.5em;
     height: 100vh;
-    /* position: fixed;
-    width: 25%; */
+    position: fixed;
+    width: 20%;
+    background: #D2DBEE;
+    border-radius: 3%;
+    box-shadow: inset 9.91px 9.91px 15px #BFC7D9, inset -9.91px -9.91px 15px #E5EFFF;
 }
 
 ul  {
@@ -17,33 +20,52 @@ ul  {
 
 li a {
     text-decoration: none;
-    padding: 0.5em 0.5em;
+    padding: 0 0.5em;
     display: block;
     color: black;
     font-size: large;
     font-weight: 500;
     display: flex;
     align-items: center;
+    gap: 0.8rem;
+}
+
+.allFriends {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 600;
 }
 
 img {
     height: 1.5em;
     width: 1.5em;
     border-radius: 50%;
-    margin-right: 0.5em;
+    margin-right: 2em;
+    margin: 0;
+    padding: 0;
 
 }
 
 li a:hover {
-    background-color: rgb(139, 139, 139);
-    color: white;
+    color: black;
+    background: #D2DBEE;
+    border-radius: 3%;
+    box-shadow: inset 9.91px 9.91px 15px #BFC7D9, inset -9.91px -9.91px 15px #E5EFFF;
 }
 
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 843px) {
     
     .navbar {
-      width: 96%;
+      width: 100%;
       background-color: rgb(178, 203, 211);
+      margin: 0;
+      position: absolute;
+      margin-bottom: 10rem;
+      height: 55vh;
+    }
+
+ .navbar  ul li a {
+        text-align: center;
+        margin-left: 1rem;
     }
   }

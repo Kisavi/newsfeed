@@ -1,15 +1,19 @@
-<div class="feedsSection">
+<div class="feedsSection flex-container">
+    <!-- start navbar section -->
     <div class="nav">
         <app-navbar (userId)="setUserId($event)" (getUserFeeds)="getFeeds()"></app-navbar>
     </div>
+    <!-- end navbar -->
 
+    <!-- start all feeds section -->
     <div class="all-feeds">
-        <h6 class="center">All feeds alert</h6>
-        <p *ngIf="randomUser">{{randomUser.firstname}}</p>
-        <!-- <p>{{userId}}</p> -->
-        <img *ngIf="randomUser" src="{{randomUser.avatar_url}}" style="height: 1.5rem; width: 1.5rem;">
+        <div *ngIf="randomUser" class="user-details flex">
+            <p>Welcome back <i>{{randomUser.firstname}}</i>!!!</p>
+            <img  src="{{randomUser.avatar_url}}">
+        </div>
+        
         <div *ngFor="let feed of feeds; index as i" class="allFeeds">
-            <!-- images -->
+            <!--  start images section-->
             <div *ngIf="feed.hasOwnProperty('image_url')" class="feed-alert">
                 <div class="headline">
                     <p>{{feed.subject}} {{feed.action}} {{feed.pronoun}} {{feed.object}}</p>
@@ -19,40 +23,37 @@
                     <img src="{{feed.image_url}}">
                     <div class="reaction">
                         <div class="reaction">
-                            <p style="margin-right: 0.2em;" (click)="like(i)"><i class='bx bx-like bx-sm'></i></p>
+                            <p  (click)="like(i)"><i class='bx bx-like bx-sm bx-tada-hover'></i></p>
                             <p>{{feed.likes.length}}</p>
                         </div>
 
                         <div class="reaction">
-                            <p style="margin-right: 0.2em; margin-left: 0.7em;"><i class='bx bx-comment bx-sm'></i></p>
+                            <p (click)="toggleComment(i)" style="margin-right: 0.2em; margin-left: 0.7em;"><i class='bx bx-comment bx-sm'></i></p>
                             <p>{{feed.comments.length}}</p>
                         </div>
                     </div>
+                   
         
-                    <!-- start -->
-                    <section id="app">
-                        <div class="container">
+                    <!-- start comment section-->
+                    <!-- <ng-container *ngFor="let comments of feed" > -->
+                        <div *ngIf="isShown" class="comment-section container">
                             <div class="row">
                                 <div class="col-6">
-                                    <div  class="comment">
-                                        <p>{{feed.comments}}</p>
-                                        <p *ngFor="let trial of trials">{{trial.trial }}</p>
+                                    <div  *ngFor="let comment of comments" class="comment"> 
+                                        <!-- <p>{{comment}}</p> -->
                                     </div>
-                                    <!--End Comment-->
+                                    <p>{{feed.comments | json}}</p>
                                 </div>
-                                <!--End col -->
-                            </div><!-- End row -->
+                            </div>
                             <div class="row">
                                 <div class="col-6">
                                     <textarea [(ngModel)] = "comment" type="text" class="input" placeholder="Write a comment"></textarea>
-                                    <button (click)="getComment(i)" class='primaryContained float-right' type="submit">Add Comment</button>
-                                </div><!-- End col -->
+                                    <button (click)="getComment(i)" class="float-right" type="submit"><i class='bx bx-paper-plane bx-tada-hover bx-sm'></i></button>
+                                </div>
                             </div>
-                            <!--End Row -->
                         </div>
-                        <!--End Container -->
-                    </section><!-- end App -->
-                    <!-- end -->
+                    <!-- </ng-container>
+                    <!-- end comment section-->
                 </div>
             </div>
             <!-- end of image -->
@@ -79,4 +80,5 @@
             <!-- end of like -->
         </div>
     </div>
+    <!-- end all feeds -->
 </div>

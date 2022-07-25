@@ -14,10 +14,11 @@ export class FeedsComponent implements OnInit {
   public randomIndex = 0;
   public randomUser: any = {};
   public userId!: number;
-  public feed: any = {}
-  public likesArray: any = []
-  public comments: any[]= []
-  public comment  = ""
+  public feed: any = {};
+  public likesArray: any = [];
+  public comments: any[]= [];
+  public comment  = "";
+  public isShown:boolean = false;
   
   constructor(private feedService: FeedService, private userService: UserService) { }
 
@@ -57,7 +58,7 @@ export class FeedsComponent implements OnInit {
     // create like alert
     this.feedService.createLikeAlert(newLikeAlert)
       .subscribe(data => {
-        // console.log(data)
+        console.log(data)
       })
 
     // get feed by id
@@ -65,6 +66,7 @@ export class FeedsComponent implements OnInit {
 
     this.feedService.getFeed(feedId)
       .subscribe(data => {
+        console.log(data)
         this.feed = data
         this.likesArray = this.feed.likes
 
@@ -116,7 +118,7 @@ export class FeedsComponent implements OnInit {
     //  create comment alert
     this.feedService.createAlert(commentAlert)
      .subscribe(data => {
-      // console.log(data)
+      console.log(data)
      })
 
     // get feed by id
@@ -124,16 +126,16 @@ export class FeedsComponent implements OnInit {
 
     this.feedService.getFeed(feedId)
      .subscribe(data => {
-      // console.log(data)
+      console.log(data)
       this.feed = data
       this.comments = this.feed.comments
-      // console.log(this.comments)
+      
       let newComment=this.comment
       this.comments.push({"commentor":commentor , "comment":newComment})
       this.comment = ""
 
       let newCommentArray = this.comments
-      // console.log(newCommentArray)
+      
       let addComment = {
         "subject": this.feed.subject,
         "action": this.feed.action,
@@ -160,7 +162,7 @@ export class FeedsComponent implements OnInit {
   getFeeds() {
     this.feedService.getAllFeeds()
       .subscribe(data => {
-        // console.log(data)
+        console.log(data)
         this.feeds = data
       })
   }
@@ -170,8 +172,13 @@ export class FeedsComponent implements OnInit {
     this.userId = id
     this.feedService.getUserFeed(this.userId)
       .subscribe(data => {
-        // console.log(data)
+        console.log(data)
         this.feeds = data
       })
+  }
+
+  // toggle the comment section
+  toggleComment(feedIndex: number){
+    this.isShown = !this.isShown
   }
 }
