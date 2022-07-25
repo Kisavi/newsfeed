@@ -56,7 +56,7 @@ export class FeedsComponent implements OnInit {
     }
 
     // create like alert
-    this.feedService.createLikeAlert(newLikeAlert)
+    this.feedService.createAlert(newLikeAlert)
       .subscribe(data => {
         console.log(data)
       })
