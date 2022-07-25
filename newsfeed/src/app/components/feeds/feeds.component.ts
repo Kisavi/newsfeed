@@ -16,10 +16,11 @@ export class FeedsComponent implements OnInit {
   public userId!: number;
   public feed: any = {};
   public likesArray: any = [];
-  public comments: any[]= [];
-  public comment  = "";
-  public isShown:boolean = false;
-  
+  public comments: any[] = [];
+  public comment = "";
+  public isShown: boolean = false;
+  active: number = -1; 
+
   constructor(private feedService: FeedService, private userService: UserService) { }
 
   ngOnInit(): void {
@@ -58,7 +59,8 @@ export class FeedsComponent implements OnInit {
     // create like alert
     this.feedService.createAlert(newLikeAlert)
       .subscribe(data => {
-        console.log(data)
+        console.log(data),
+          (error: string) => console.log("error" + error)
       })
 
     // get feed by id
@@ -90,20 +92,23 @@ export class FeedsComponent implements OnInit {
         this.feedService.updateAlert(feedId, addLike)
           .subscribe(data => {
             console.log(data)
-            this.getFeeds()
-          })
+            this.getFeeds(),
+              (error: string) => console.log("error" + error)
+          }),
+
+          (error: string) => console.log("error" + error)
       })
 
     this.getFeeds()
   };
 
   // method to comment on a feed
-  getComment(index: number){
+  getComment(index: number) {
 
-     // get the name of the person who commented
-     let commentor = this.randomUser.firstname
+    // get the name of the person who commented
+    let commentor = this.randomUser.firstname
 
-     let commentAlert = {
+    let commentAlert = {
       "subject": commentor,
       "action": "commented on",
       "pronoun": `${this.feeds[index].subject}'s`,
@@ -113,48 +118,50 @@ export class FeedsComponent implements OnInit {
       "comments": [],
       "date": Date.now(),
       "userId": this.randomUser.id
-     }
+    }
 
     //  create comment alert
     this.feedService.createAlert(commentAlert)
-     .subscribe(data => {
-      console.log(data)
-     })
+      .subscribe(data => {
+        console.log(data)
+      })
 
     // get feed by id
     let feedId = this.feeds[index].id
 
     this.feedService.getFeed(feedId)
-     .subscribe(data => {
-      console.log(data)
-      this.feed = data
-      this.comments = this.feed.comments
-      
-      let newComment=this.comment
-      this.comments.push({"commentor":commentor , "comment":newComment})
-      this.comment = ""
+      .subscribe(data => {
+        console.log(data)
+        this.feed = data
+        this.comments = this.feed.comments
 
-      let newCommentArray = this.comments
-      
-      let addComment = {
-        "subject": this.feed.subject,
-        "action": this.feed.action,
-        "pronoun": this.feed.pronoun,
-        "object": this.feed.object,
-        "image_url": this.feed.image_url,
-        "date": this.feed.date,
-        "likes": this.feed.likes,
-        "comments": newCommentArray,
-        "userId": this.feed.userId
-      }
+        let newComment = this.comment
+        this.comments.push({ "commentor": commentor, "comment": newComment })
+        this.comment = ""
 
-      // put the selected feed with the updated like array
-      this.feedService.updateAlert(feedId, addComment)
-        .subscribe(data => {
-          console.log(data)
-          this.getFeeds()
-        })
-     })
+        let newCommentArray = this.comments
+
+        let addComment = {
+          "subject": this.feed.subject,
+          "action": this.feed.action,
+          "pronoun": this.feed.pronoun,
+          "object": this.feed.object,
+          "image_url": this.feed.image_url,
+          "date": this.feed.date,
+          "likes": this.feed.likes,
+          "comments": newCommentArray,
+          "userId": this.feed.userId
+        }
+
+        // put the selected feed with the updated like array
+        this.feedService.updateAlert(feedId, addComment)
+          .subscribe(data => {
+            console.log(data),
+              (error: string) => console.log("error" + error)
+            this.getFeeds()
+          }),
+          (error: string) => console.log("error" + error)
+      })
 
   }
 
@@ -163,7 +170,8 @@ export class FeedsComponent implements OnInit {
     this.feedService.getAllFeeds()
       .subscribe(data => {
         console.log(data)
-        this.feeds = data
+        this.feeds = data,
+          (error: string) => console.log("error" + error)
       })
   }
 
@@ -173,12 +181,25 @@ export class FeedsComponent implements OnInit {
     this.feedService.getUserFeed(this.userId)
       .subscribe(data => {
         console.log(data)
-        this.feeds = data
+        this.feeds = data,
+          (error: string) => console.log("error" + error)
       })
   }
 
   // toggle the comment section
-  toggleComment(feedIndex: number){
-    this.isShown = !this.isShown
+  toggleComment(index: number) {
+    if (index == this.active) {
+      this.active = -1
+      return;
+    }
+    this.active = index
   }
+
+  isActive(index: number){
+    if (index == this.active){
+      return true;
+    }
+    return false;
+  }
+
 }
