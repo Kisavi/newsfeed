@@ -19,7 +19,7 @@ export class FeedsComponent implements OnInit {
   public comments: any[] = [];
   public comment = "";
   public isShown: boolean = false;
-  active: number = -1; 
+  active: number = -1;
 
   constructor(private feedService: FeedService, private userService: UserService) { }
 
@@ -195,8 +195,8 @@ export class FeedsComponent implements OnInit {
     this.active = index
   }
 
-  isActive(index: number){
-    if (index == this.active){
+  isActive(index: number) {
+    if (index == this.active) {
       return true;
     }
     return false;

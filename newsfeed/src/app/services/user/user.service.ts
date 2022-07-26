@@ -9,7 +9,8 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
   // user url
-  private userUrl = `${environment.baseUrl}/users`
+  private userUrl = "https://jsonfeedsapi.herokuapp.com/users";
+  // private userUrl = `${environment.baseUrl}/users`
 
   constructor(private http: HttpClient) { }
   // method to get all the users
