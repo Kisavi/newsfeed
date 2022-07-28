@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UserService } from 'src/app/services/user/user.service';
 import { User } from 'src/app/models/user';
+declare const openNav: any;
+declare const closeNav: any;
 
 @Component({
   selector: 'app-navbar',
@@ -20,23 +22,28 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUsers()
     .subscribe(data => {
-      // console.log(data)
+      console.log(data)
       this.users = data
-      //  console.log(this.users)
       });
   }
   
 // get single user(userId of the user clicked)
 getUser(index: number){
-  // console.log(this.users[index].firstname)
   let UserId = this.users[index].id
-  // console.log(UserId)
     this.userId.emit(UserId);
 }
 
 // get all feeds
 getAllFeeds(){
   this.getUserFeeds.emit()
+}
+
+openNavbar() {
+  openNav()
+}
+
+closeNavbar() {
+  closeNav()
 }
  
 }
