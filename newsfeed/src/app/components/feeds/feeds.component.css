@@ -122,12 +122,6 @@ button:hover {
 		display: block;
 	}
 
-	.nav {
-		width: 100%;
-		height: 60vh;
-		margin-bottom: 1em;
-	}
-
 	.all-feeds {
 		margin: 0;
 		width: 100%;

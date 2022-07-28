@@ -1,4 +1,8 @@
-<div class="navbar">
+<button class="openbtn" (click)="openNavbar();">&#9776;</button>
+
+<div id="myNavbar" class="navbar">
+    <a href="javascript:void(0)" class="closebtn" (click)="closeNavbar();">&times;</a>
+    <!-- <button class="closebtn" (click)="closeNavbar()">&times;</button> -->
     <ul>
         <li class="allFriends">
             <a  (click)="getAllFeeds()" href="#"><p>AllFriends</p> </a>
@@ -13,4 +17,6 @@
         </ul>
     </ul>
 </div>
+
+
 
