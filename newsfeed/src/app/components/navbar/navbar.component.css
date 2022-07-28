@@ -1,5 +1,4 @@
 .navbar {
-    border: 1px solid transparent;
     background-color: rgb(222, 222, 222);
     border-radius: 0.3em;
     margin-left: 0.5em;
@@ -59,7 +58,7 @@ li a:hover {
 
 @media only screen and (max-width: 843px) {
     .navbar {
-        height: 60vh;
+        height: auto;
         width: 0;
         z-index: 1;
         top: 0;
