@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit {
   @Output() getUserFeeds =new EventEmitter();
 
   public users:User[] = [];
+  public errorMessage:any;
 
   constructor(private userService: UserService) { }
 
@@ -24,6 +25,8 @@ export class NavbarComponent implements OnInit {
     .subscribe(data => {
       console.log(data)
       this.users = data
+      },(error) => {
+        this.errorMessage = error
       });
   }
   
