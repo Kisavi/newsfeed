@@ -12,6 +12,9 @@
             <img  src="{{randomUser.avatar_url}}">
         </div>
         
+        <!-- error message -->
+        <h4 *ngIf="errorMsg">{{errorMsg}}</h4>
+
         <div *ngFor="let feed of feeds; let i = index" class="allFeeds">
             <!--  start images section-->
             <div *ngIf="feed.hasOwnProperty('image_url')" class="feed-alert">
@@ -39,7 +42,7 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div *ngFor="let comment of feed.comments" class="comment"> 
-                                        <p><span class="emphasize">{{comment.commentor}}</span>: {{comment.comment}}</p>
+                                        <p class="commentMessage"><span class="emphasize">{{comment.commentor}}</span>: {{comment.comment}}</p>
                                     </div>
                                 </div>
                             </div>

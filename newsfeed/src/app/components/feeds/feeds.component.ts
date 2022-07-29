@@ -10,6 +10,7 @@ import { User } from 'src/app/models/user';
 })
 export class FeedsComponent implements OnInit {
   public feeds: any[] = [];
+  public errorMsg:any;
   public users: User[] = [];
   public randomIndex = 0;
   public randomUser: any = {};
@@ -29,7 +30,7 @@ export class FeedsComponent implements OnInit {
     // subscribe to the observable returned by the user service to get all users
     this.userService.getUsers()
       .subscribe(data => {
-        // console.log(data)
+        console.log(data)
         this.users = data
 
         // get a random index from the user's array
@@ -37,6 +38,8 @@ export class FeedsComponent implements OnInit {
 
         // get the user at the index of the random index in the user's array
         this.randomUser = this.users[this.randomIndex]
+      },(error) => {
+        this.errorMsg = error
       });
   }
 
@@ -59,8 +62,9 @@ export class FeedsComponent implements OnInit {
     // create like alert
     this.feedService.createAlert(newLikeAlert)
       .subscribe(data => {
-        console.log(data),
-          (error: string) => console.log("error" + error)
+        console.log(data)
+      },(error) => {
+        this.errorMsg = error
       })
 
     // get feed by id
@@ -92,11 +96,12 @@ export class FeedsComponent implements OnInit {
         this.feedService.updateAlert(feedId, addLike)
           .subscribe(data => {
             console.log(data)
-            this.getFeeds(),
-              (error: string) => console.log("error" + error)
-          }),
-
-          (error: string) => console.log("error" + error)
+            this.getFeeds()
+          },(error) => {
+            this.errorMsg = error
+          })
+      },(error) => {
+        this.errorMsg = error
       })
 
     this.getFeeds()
@@ -124,6 +129,8 @@ export class FeedsComponent implements OnInit {
     this.feedService.createAlert(commentAlert)
       .subscribe(data => {
         console.log(data)
+      },(error) => {
+        this.errorMsg = error
       })
 
     // get feed by id
@@ -156,11 +163,13 @@ export class FeedsComponent implements OnInit {
         // put the selected feed with the updated like array
         this.feedService.updateAlert(feedId, addComment)
           .subscribe(data => {
-            console.log(data),
-              (error: string) => console.log("error" + error)
+            console.log(data)
             this.getFeeds()
-          }),
-          (error: string) => console.log("error" + error)
+          },(error) => {
+            this.errorMsg = error
+          })
+      },(error) => {
+        this.errorMsg = error
       })
 
   }
@@ -170,8 +179,9 @@ export class FeedsComponent implements OnInit {
     this.feedService.getAllFeeds()
       .subscribe(data => {
         console.log(data)
-        this.feeds = data,
-          (error: string) => console.log("error" + error)
+        this.feeds = data
+      },(error) => {
+        this.errorMsg = error
       })
   }
 
@@ -181,8 +191,9 @@ export class FeedsComponent implements OnInit {
     this.feedService.getUserFeed(this.userId)
       .subscribe(data => {
         console.log(data)
-        this.feeds = data,
-          (error: string) => console.log("error" + error)
+        this.feeds = data
+      },(error) => {
+        this.errorMsg = error
       })
   }
 
